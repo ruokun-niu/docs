@@ -17,6 +17,9 @@ matrix:
       ignores:
       - code
       - pre
+  - pyspelling.filters.regex:
+      patterns:
+      - '\b\w+\.png\b'   # Exclude words ending with .png
   sources:
   - 'docs/content/**/*.md'
   default_encoding: utf-8
