@@ -8,7 +8,7 @@ hide_readingtime: true
 description: "Build your first change-driven solution with Drasi Server"
 ---
 
-This Getting Started tutorial teaches you how to use Drasi Server by progressively building a change-driven solution. You'll start with a simple configuration and extend it step by step — each step introduces a new Drasi capability.
+This Getting Started tutorial teaches you how to use Drasi Server by getting it installed and running, then progressively building an increasingly sophisticated change-driven solution. You'll start with a simple configuration and extend it step by step — each step introduces a new Drasi capability.
 
 | Step | What You'll Learn | Time |
 |------|-------------------|------|
@@ -19,7 +19,8 @@ This Getting Started tutorial teaches you how to use Drasi Server by progressive
 | **[Step 5: Add an Aggregation Query](#phase-3)** | Add a query with `count()` — see aggregations update automatically as data changes. Introduces the SSE CLI for streaming results | 5 min |
 | **[Step 6: Add Time-Based Detection](#phase-4)** | Detect the *absence* of activity over time — a powerful capability for monitoring and alerting | 5 min |
 
-**Steps 1–3** give you a working Drasi Server example in under 20 minutes. **Steps 4–6** are optional and explore progressively advanced capabilities — complete as many as you like.
+**Steps 1–3** give you a working Drasi Server solution in under 20 minutes.  
+**Steps 4–6** explore progressively advanced capabilities of Drasi Server.
 
 ## Step 1: Set Up Your Environment {#setup}
 
