@@ -10,13 +10,15 @@ Use VS Code Dev Containers for a consistent development environment with all dep
 
 ## Prerequisites
 
-- **Git** — [Install Git](https://git-scm.com/downloads)
-- **Docker Desktop** — [Install Docker Desktop](https://www.docker.com/products/docker-desktop/) (or Docker Engine on Linux)
+- **Git** — Needed to clone the Drasi Server code (<a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Install Git</a>)
+- **Docker** — Needed to run the Drasi Server Dev Container and the PostgreSQL database used in the tutorial. The easiest way to get started depends on your platform:
+  - **Mac/Windows**: Install <a href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener noreferrer">Docker Desktop</a>
+  - **Linux**: Install <a href="https://docs.docker.com/engine/install/" target="_blank" rel="noopener noreferrer">Docker Engine</a> (recommended) or <a href="https://docs.docker.com/desktop/setup/install/linux/" target="_blank" rel="noopener noreferrer">Docker Desktop</a>
   - Recommended resources: 4+ CPU cores, 8+ GB memory
-- **VS Code** — [Install Visual Studio Code](https://code.visualstudio.com/)
-- **Dev Containers extension** — [Install from VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- **VS Code** — Needed to run the Drasi Server Dev Container and edit files during the tutorial (<a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Install Visual Studio Code</a>)
+- **VS Code Dev Containers extension** — Needed to run the Drasi Server Dev Container (<a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers" target="_blank" rel="noopener noreferrer">Install from VS Code Marketplace</a>)
 
-### Verify Git is Installed
+#### Verify Git is Installed
 
 ```bash
 git --version
@@ -24,7 +26,7 @@ git --version
 
 You should see output like `git version 2.x.x`. If you see "command not found", install Git from the link above.
 
-### Verify Docker is Running
+#### Verify Docker is Running
 
 ```bash
 docker ps
@@ -32,47 +34,49 @@ docker ps
 
 If Docker is running, you'll see a table with these headings showing running containers (even if no containers are running):
 
-```
+```text
 CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES
 ```
 
-If you see an error like `Cannot connect to the Docker daemon`, Docker isn't running. Start Docker Desktop and wait for it to fully initialize, then try again. If problems persist, see the [Docker troubleshooting guide](https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/) for additional help.
+If you see an error like `Cannot connect to the Docker daemon`, Docker isn't running. Start Docker Desktop (Mac/Windows) or the Docker service (`sudo systemctl start docker` on Linux) and wait for it to fully initialize, then try again. If problems persist, see the [Docker troubleshooting guide](https://docs.docker.com/config/daemon/troubleshoot/) for additional help.
 
-## Step 1: Clone Drasi Server Repo and Open in Dev Container
+## Step 1: Clone Drasi Server Repo
 
-Clone the Drasi Server repository:
+Clone the <a href="https://github.com/drasi-project/drasi-server" target="_blank" rel="noopener noreferrer">Drasi Server repository</a>. In a terminal, run:
 
 ```bash
 git clone https://github.com/drasi-project/drasi-server.git
 ```
 
-Open in the repo folder in VS Code (for example):
+## Step 2: Open Drasi Server in a VS Code Dev Container
+Once the cloning is complete, change to the newly created `drasi-server` folder and open it in VS Code:
 
 ```bash
 cd drasi-server
 code .
 ```
 
-When VS Code opens, you'll see a notification:
-> **Folder contains a Dev Container configuration file. Reopen folder to develop in a container.**
+> **Tip:** If you are using VS Code Insiders, use `code-insiders .` instead of `code .` to open the folder.
 
-Click **Reopen in Container**. When prompted to select a dev container configuration, choose **Drasi Server - Getting Started Tutorial**.
+When VS Code opens, look for a notification that says: **"Folder contains a Dev Container configuration file. Reopen folder to develop in a container."**
 
-{{< alert title="Manually Open Dev Container" color="info" >}}
-If you don't see the notification described, press `F1` and type "Dev Containers: Reopen in Container". Then press enter to run the command. If prompted, select "Drasi Server - Getting Started Tutorial" from the list of configurations.
-{{< /alert >}}
+Click **Reopen in Container**.
 
-## Step 2: Wait for Setup
+> **Note**: If you don't see the notification described, press `F1` and type "Dev Containers: Reopen in Container". Then press enter to run the command. If prompted, select "Drasi Server - Getting Started Tutorial" from the list of configurations.
 
-The container takes several minutes to build on first run. The setup script will:
-1. Install PostgreSQL client
-2. Build and install Drasi Server to `./bin/drasi-server`
+The container takes several minutes to build on first run. During this time the setup script will:
+
+1. Build Drasi Server and put the executable in the `./bin/drasi-server` folder.
+2. Install a PostgreSQL client for use during the tutorial.
+3. Install `curl`, which is used in later tutorial steps.
 
 Watch the terminal for: **"Drasi Server Getting Started tutorial environment is ready!"**
 
+This indicates the container is ready to use.
+
 ## Step 3: Verify the Build
 
-Verify that Drasi Server is accessible running the following command in the terminal:
+Verify that Drasi Server is accessible by running the following command in the terminal:
 
 ```bash
 ./bin/drasi-server --version
@@ -80,7 +84,7 @@ Verify that Drasi Server is accessible running the following command in the term
 
 You should see output showing the version number, for example:
 
-```
+```text
 drasi-server 0.1.0
 ```
 
@@ -101,6 +105,7 @@ You now have Drasi Server accessible at `./bin/drasi-server` from the repository
 ### Port Forwarding
 
 The Dev Container automatically forwards ports to your local machine. Check the **Ports** tab in VS Code to access:
+
 - Port 8180 (Drasi Server API)
 - Port 8181 (SSE stream)
 - Port 5532 (PostgreSQL)
@@ -108,11 +113,13 @@ The Dev Container automatically forwards ports to your local machine. Check the 
 ### Rebuild the Container
 
 If you change `.devcontainer/getting-started/devcontainer.json`:
+
 1. Press `F1`
 2. Select "Dev Containers: Rebuild Container"
 
 ### Exit the Dev Container
 
 To return to local development:
+
 1. Press `F1`
 2. Select "Dev Containers: Reopen Folder Locally"

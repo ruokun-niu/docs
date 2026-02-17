@@ -3,18 +3,21 @@ type: "docs"
 title: "Setup: Download Binary"
 linkTitle: "Download Binary"
 weight: 30
-description: "Download a prebuilt Drasi Server binary for macOS or Linux"
+description: "Download a prebuilt Drasi Server binary for your platform"
 ---
 
 This is the fastest way to get started with Drasi Server. Download a prebuilt binary and start the tutorial database.
 
 ## Prerequisites
 
-- **Git** — [Install Git](https://git-scm.com/downloads)
-- **Docker** — Required for the tutorial database ([Install Docker Desktop](https://www.docker.com/products/docker-desktop/))
-- **curl** and **tar** — For downloading and extracting the binary ([Install curl](https://curl.se/download.html))
+- **curl** — Needed to download the Drasi Server binary and used in later tutorial steps <a href="https://curl.se/download.html" target="_blank" rel="noopener noreferrer">(Install curl)</a>
+- **Docker** — Needed to run the PostgreSQL database used in the tutorial. The easiest way to get started depends on your platform:
+  - **Mac/Windows**: Install <a href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener noreferrer">Docker Desktop</a>
+  - **Linux**: Install <a href="https://docs.docker.com/engine/install/" target="_blank" rel="noopener noreferrer">Docker Engine</a> (recommended) or <a href="https://docs.docker.com/desktop/setup/install/linux/" target="_blank" rel="noopener noreferrer">Docker Desktop</a>
+  - Recommended resources: 4+ CPU cores, 8+ GB memory
+- **Text Editor** — Needed to edit files during the tutorial (e.g. <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a>)
 
-### Verify Docker is Running
+#### Verify Docker is Running
 
 ```bash
 docker ps
@@ -26,20 +29,20 @@ If Docker is running, you'll see a table with these headings showing running con
 CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES
 ```
 
-If you see an error like `Cannot connect to the Docker daemon`, Docker isn't running. Start Docker Desktop and wait for it to fully initialize, then try again. If problems persist, see the [Docker troubleshooting guide](https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/) for additional help.
+If you see an error like `Cannot connect to the Docker daemon`, Docker isn't running. Start Docker Desktop (Mac/Windows) or the Docker service (`sudo systemctl start docker` on Linux) and wait for it to fully initialize, then try again. If problems persist, see the [Docker troubleshooting guide](https://docs.docker.com/config/daemon/troubleshoot/) for additional help.
 
-## Step 1: Clone the Repository
+## Step 1: Create Tutorial Folder
 
-Clone the Drasi Server repository to get the tutorial files:
+Open a terminal and in a suitable location on your machine, create a folder for the tutorial files, then change to that directory. For example:
 
 ```bash
-git clone https://github.com/drasi-project/drasi-server.git
+mkdir drasi-server
 cd drasi-server
 ```
 
-## Step 2: Download Drasi Server
+## Step 2: Download the Drasi Server Binary
 
-Create the bin directory and download the binary for your platform:
+The rest of the tutorial assumes you have the Drasi Server executable at `./bin/drasi-server`, so the next step is to download the appropriate binary for your platform and place it there:
 
 {{< tabpane persist="header" >}}
 {{< tab header="macOS (Apple Silicon)" lang="bash" >}}
@@ -64,7 +67,9 @@ chmod +x bin/drasi-server
 {{< /tab >}}
 {{< /tabpane >}}
 
-Verify the download:
+## Step 3: Verify the Download
+
+Verify the binary works:
 
 ```bash
 ./bin/drasi-server --version
@@ -78,7 +83,12 @@ drasi-server 0.1.0
 
 ---
 
-## Set Environment Variables
+## Step 4: Download the Tutorial Files
+
+TODO
+
+
+## Step 5: Set Environment Variables
 
 The tutorial uses environment variables for port numbers and database host so the same commands work across all setup environments. Run the following to set the defaults for the Download Binary environment:
 

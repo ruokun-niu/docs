@@ -6,7 +6,7 @@ weight: 10
 description: "Run Drasi Server in a cloud-based GitHub Codespace"
 ---
 
-Run everything in the cloud with GitHub Codespaces. No local installation required — just a browser and a GitHub account.
+This is the easiest way to get started with Drasi Server. Run everything in the cloud with GitHub Codespaces. No local installation required — just a browser and a GitHub account.
 
 ## Prerequisites
 
@@ -24,6 +24,7 @@ Click the button below to create a new Codespace:
 When prompted to select a **Dev Container Configuration**, choose **Drasi Server - Getting Started Tutorial**.
 
 Or manually:
+
 1. Go to [github.com/drasi-project/drasi-server](https://github.com/drasi-project/drasi-server)
 2. Click the green **Code** button
 3. Select the **Codespaces** tab
@@ -33,15 +34,17 @@ Or manually:
 
 ## Step 2: Wait for Setup
 
-The Codespace takes a few minutes to initialize. The setup script will:
-1. Install PostgreSQL client
-2. Build and install Drasi Server to `./bin/drasi-server`
+The Codespace takes a few minutes to initialize. During this time the setup script will:
+
+1. Build Drasi Server and put the executable in the `./bin/drasi-server` folder.
+2. Install a PostgreSQL client for use during the tutorial.
+3. Install `curl`, which is used in later tutorial steps.
 
 Watch the terminal for: **"Drasi Server Getting Started tutorial environment is ready!"**
 
-{{< alert title="Build time" color="info" >}}
-The first build takes several minutes. Subsequent Codespace sessions are faster if you don't delete the Codespace.
-{{< /alert >}}
+This indicates the container is ready to use.
+
+> **Tip**: The first build takes several minutes. Subsequent Codespace sessions are faster if you don't delete the Codespace.
 
 ## Step 3: Verify the Build
 

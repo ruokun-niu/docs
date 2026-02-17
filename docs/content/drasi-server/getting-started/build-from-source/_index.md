@@ -10,12 +10,16 @@ Build Drasi Server from source. This approach is ideal for contributors or if yo
 
 ## Prerequisites
 
-- **Git** — [Install Git](https://git-scm.com/downloads)
-- **Docker** — Required for the tutorial database ([Install Docker Desktop](https://www.docker.com/products/docker-desktop/))
-- **Rust 1.88+** — For building Drasi Server ([Install via rustup](https://rustup.rs/))
-- **curl** — Used in later tutorial steps ([Install curl](https://curl.se/download.html))
+- **Git** — Needed to clone the Drasi Server code (<a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Install Git</a>)
+- **Docker** — Needed to run the PostgreSQL database used in the tutorial. The easiest way to get started depends on your platform:
+  - **Mac/Windows**: Install <a href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener noreferrer">Docker Desktop</a>
+  - **Linux**: Install <a href="https://docs.docker.com/engine/install/" target="_blank" rel="noopener noreferrer">Docker Engine</a> (recommended) or <a href="https://docs.docker.com/desktop/setup/install/linux/" target="_blank" rel="noopener noreferrer">Docker Desktop</a>
+  - Recommended resources: 4+ CPU cores, 8+ GB memory
+- **Rust 1.88+** — For building Drasi Server <a href="https://rustup.rs/" target="_blank" rel="noopener noreferrer">(Install via rustup)</a>
+- **Text Editor** — Needed to edit files during the tutorial (e.g. <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a>)
+- **curl** — Used in later tutorial steps <a href="https://curl.se/download.html" target="_blank" rel="noopener noreferrer">(Install curl)</a>
 
-### Verify Git is Installed
+#### Verify Git is Installed
 
 ```bash
 git --version
@@ -23,7 +27,7 @@ git --version
 
 You should see output like `git version 2.x.x`. If you see "command not found", install Git from the link above.
 
-### Verify Docker is Running
+#### Verify Docker is Running
 
 ```bash
 docker ps
@@ -35,9 +39,9 @@ If Docker is running, you'll see a table with these headings showing running con
 CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES
 ```
 
-If you see an error like `Cannot connect to the Docker daemon`, Docker isn't running. Start Docker Desktop and wait for it to fully initialize, then try again. If problems persist, see the [Docker troubleshooting guide](https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/) for additional help.
+If you see an error like `Cannot connect to the Docker daemon`, Docker isn't running. Start Docker Desktop (Mac/Windows) or the Docker service (`sudo systemctl start docker` on Linux) and wait for it to fully initialize, then try again. If problems persist, see the [Docker troubleshooting guide](https://docs.docker.com/config/daemon/troubleshoot/) for additional help.
 
-### Verify Rust is Installed
+#### Verify Rust is Installed
 
 ```bash
 rustc --version   # Should be 1.88.0 or later
@@ -53,20 +57,28 @@ cargo 1.88.0 (873a06493 2025-05-10)
 
 With the prerequisites verified, you're ready to clone the repository and build Drasi Server from source.
 
-## Step 1: Clone and Build
+## Step 1: Clone Drasi Server Repo
 
-Clone the repository and build Drasi Server:
+Clone the <a href="https://github.com/drasi-project/drasi-server" target="_blank" rel="noopener noreferrer">Drasi Server repository</a>. In a terminal, run:
 
 ```bash
 git clone https://github.com/drasi-project/drasi-server.git
+```
+
+## Step 2: Build Drasi Server
+
+Once the cloning is complete, change to the newly created `drasi-server` folder and build Drasi Server:
+
+```bash
 cd drasi-server
 cargo install --path . --root . --locked
 ```
-The `cargo install` command takes several minutes to complete the first time you run it.
+
+The `cargo install` command takes several minutes to complete the first time you run it because it needs to download and compile all dependencies. Subsequent runs will be much faster since Cargo caches the compiled dependencies.
 
 The `--root .` flag tells Cargo to install the Drasi Server binary to `./bin/drasi-server` in the current directory, which is where the rest of the tutorial assumes it will be.
 
-### Verify the Build
+## Step 3: Verify the Build
 
 Verify the binary works:
 
@@ -82,7 +94,7 @@ drasi-server 0.1.0
 
 ---
 
-## Step 2: Set Environment Variables
+## Step 4: Set Environment Variables
 
 The tutorial uses environment variables for various port numbers so the same commands work across all setup environments. Run the following to set the required environment variables:
 
