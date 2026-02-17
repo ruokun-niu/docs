@@ -1612,3 +1612,6 @@ j's
 tokio
 ETL
 IEC
+Kernighan's
+POC
+Bluesky

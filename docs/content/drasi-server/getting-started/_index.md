@@ -757,7 +757,7 @@ Drasi didn't re-scan the `Message` table in the database — it incrementally up
 
 Press `Ctrl+C` in the SSE CLI terminal to stop streaming and delete the SSE Reaction.
 
-**✅ Checkpoint**: You understand that Drasi tracks state — aggregations update in real-time as data changes, without re-querying the database. You have seen it is possible to create temporary Reactions programatically (like the SSE CLI) that subscribe to Continuous Queries on the fly to stream changes in real time.
+**✅ Checkpoint**: You understand that Drasi tracks state — aggregations update in real-time as data changes, without re-querying the database. You have seen it is possible to create temporary Reactions programmatically (like the SSE CLI) that subscribe to Continuous Queries on the fly to stream changes in real time.
 
 > **Note**: The Drasi Server config file after the changes made in this step is available in `./examples/getting-started/configs/getting-started-step-5.yaml` if you want to compare it with your config file or use it as a reference for future use.
 
