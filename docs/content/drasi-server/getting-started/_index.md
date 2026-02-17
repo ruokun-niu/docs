@@ -11,7 +11,7 @@ description: "Build your first change-driven solution with Drasi Server"
 This Getting Started tutorial teaches you how to use Drasi Server by getting it installed and running, then progressively building an increasingly sophisticated change-driven solution. You'll start with a simple configuration and extend it step by step — each step introduces a new Drasi capability.
 
 | Step | What You'll Learn | Time |
-|------|-------------------|------|
+| ---- | ----------------- | ---- |
 | **[Step 1: Set Up Your Environment](#setup)** | Install Drasi Server and set up your development environment | 5 min |
 | **[Step 2: Set Up the Tutorial Database](#database)** | Start a PostgreSQL database and load sample data | 3 min |
 | **[Step 3: Create Your First Configuration](#phase-1)** | Use `drasi-server init` to create a Source, Continuous Query, and Log Reaction — see changes flow through Drasi in real time | 10 min |
@@ -101,7 +101,7 @@ Once the container is up, initialize the database schema and sample data.
 The tutorial uses a simple `Message` table with the following schema:
 
 | Field | Type | Description |
-|-------|------|-------------|
+| ----- | ---- | ----------- |
 | MessageId | integer | Unique message identifier |
 | From | varchar(50) | Who sent the message |
 | Message | varchar(200) | The message content |
@@ -112,7 +112,7 @@ The tutorial uses a simple `Message` table with the following schema:
 The `Message` table is initially populated with these messages:
 
 | MessageId | From | Message |
-|-----------|------|---------|
+| --------- | ---- | ------- |
 | 1 | Buzz Lightyear | To infinity and beyond! |
 | 2 | Brian Kernighan | Hello World |
 | 3 | Antoninus | I am Spartacus |
@@ -159,11 +159,9 @@ You should see the 4 sample messages:
 
 Now you'll create your initial Drasi Server configuration using the interactive `drasi-server init` command.
 
-The `init` command walks you through an interactive wizard that will assist you in creating a correctly formatted Drasi Server config file. The wizard will only write the config file at the end, so if you make a mistake just break out of the wizard using `ctrl-c` and run `drasi-server init` again. 
-
+The `init` command walks you through an interactive wizard that will assist you in creating a correctly formatted Drasi Server config file. The wizard will only write the config file at the end, so if you make a mistake just break out of the wizard using `ctrl-c` and run `drasi-server init` again.
 
 > **Note:** The `init` command cannot be used to edit existing config files, you must edit them in your preferred text editor.
-
 
 ### Create the Drasi Server Configuration
 
@@ -180,7 +178,7 @@ Here's what to enter at each prompt:
 Configuration starts with general Drasi Server settings.
 
 | Prompt | Enter | Notes |
-|--------|-------|-------|
+| ------ | ----- | ----- |
 | **Server host** | `0.0.0.0` (default) | Press Enter to accept |
 | **Server port** | `${SERVER_PORT:-8080}` | Uses env var with 8080 as default (see note below) |
 | **Log level** | `info` | Use arrow keys to select |
@@ -210,7 +208,7 @@ After configuring server settings, you'll add a data source. For this tutorial, 
 After selecting PostgreSQL, you'll configure the database connection settings:
 
 | Prompt | Enter | Notes |
-|--------|-------|-------|
+| ------ | ----- | ----- |
 | **Source ID** | `my-postgres` | A unique name for this source |
 | **Database host** | `${DB_HOST:-localhost}` | Defaults to `localhost` if `DB_HOST` is not set |
 | **Database port** | `${POSTGRES_HOST_PORT:-5432}` | Defaults to `5432` if `POSTGRES_HOST_PORT` is not set |
@@ -222,7 +220,6 @@ After selecting PostgreSQL, you'll configure the database connection settings:
 | **Does table 'Message' need key columns specified?** | `Yes` | Need to configure tableKey for `Message` table |
 | **Key columns for 'Message'** | `MessageId` | The Message table's primary key |
 | **Bootstrap provider** | `PostgreSQL` | Use arrow keys to select "PostgreSQL - Load initial data" |
-
 
 <div style="margin-top: 1.5rem;"></div>
 
@@ -252,16 +249,16 @@ Configuring PostgreSQL Source
 
 #### 3. Reactions
 
-Finally, you will add a Reaction to process changes to the Continuous Query results. 
+Finally, you will add a Reaction to process changes to the Continuous Query results.
 
 Use the arrow keys to highlight **Log**, press Space to select the Reaction, then Enter.
 
 After selecting Log, you'll configure the following settings:
 
 | Prompt | Enter | Notes |
-|--------|-------|-------|
+| ------ | ----- | ----- |
 | **Reaction ID** | `log-reaction` (default) | Press Enter to accept |
- 
+
 After completing the Reactions section of the wizard, your terminal will show the following:
 
 ```text
@@ -321,6 +318,7 @@ queries:
 The `|` character allows you to write the query across multiple lines for readability. The `Message` label in the `Match` clause must match the table name exactly (labels are case-sensitive). Leave the other fields (`queryLanguage`, `sources`, etc.) as they are.
 
 ### Update the Log Reaction
+
 Because you changed the Continuous Query's `id` from `my-query` to `all-messages`, you need to update the Log Reaction's configuration to subscribe to the new Continuous Query ID.
 
 Find the `reactions` section in your config file and update the `queries` field to reference the new query ID as shown here:
@@ -344,7 +342,7 @@ Run Drasi Server with your new configuration using the following command:
 
 You'll see detailed startup logs as Drasi Server initializes all configured Sources, Continuous Queries, and Reactions. There's a lot of output, so look for these key lines:
 
-```
+```text
 Starting Drasi Server
   Config file: getting-started.yaml
   API Port: 8080
@@ -353,13 +351,13 @@ Starting Drasi Server
 
 This shows the name of the config file being used, the log level that controls the output to the console, and the port on which the Drasi Server management API is accessible.
 
-```
+```text
 [log-reaction] Started - receiving results from queries: ["all-messages"]
 ```
 
 This confirms that the `log-reaction` Reaction is subscribed to Query Result Change notifications from the `all-messages` Continuous Query.
 
-```
+```text
 Drasi Server started successfully with API on port 8080
 ```
 
@@ -369,7 +367,6 @@ Shortly after, the bootstrap process loads the initial data from the `Messages` 
 [BOOTSTRAP] Query 'all-messages' completed bootstrap from source 'my-postgres' (4 events)
 [BOOTSTRAP] Query 'all-messages' all sources completed bootstrap
 [BOOTSTRAP] Emitted bootstrapCompleted signal for query 'all-messages'
-
 ```
 
 ### View Continuous Query Results
@@ -433,7 +430,7 @@ However you choose to view the `all-messages` results, that data will look somet
 }
 ```
 
-> **Tip:** The Drasi Server REST API also provides a Swagger UI at **http://localhost:808/api/v1/docs/** where you can explore all available endpoints interactively.
+> **Tip:** The Drasi Server REST API also provides a Swagger UI at <a href="http://localhost:808/api/v1/docs/" target="_blank" rel="noopener noreferrer">http://localhost:808/api/v1/docs/</a> where you can explore all available endpoints interactively.
 
 ### Test the all-messages Continuous Query
 
@@ -450,6 +447,7 @@ Watch the Drasi Server console — a notification of an addition to the `all-mes
 [log-reaction] Query 'all-messages' (1 items):
 [log-reaction]   [ADD] {"From":"You","Message":"My first message!","MessageId":"5"}
 ```
+
 > **Tip:** You can customize the Log Reaction output format using templates. See [Configure Log Reaction](../how-to-guides/configuration/configure-reactions/configure-log-reaction/) for details.
 
 If you view the `all-messages` query results again through the REST API, you'll see the new message included in the result set.
@@ -492,13 +490,13 @@ All data source changes that alter the result set of a Continuous Query generate
 
 <div style="margin-top: 1.5rem;"></div>
 
-**✅ Checkpoint**: You've created your first Source, Continuous Query, and Reaction. You know how to view the current result set of a Continuous Query through the REST API. And you've also seen how changes in the database flow into Drasi Server and notification of changes to Continuous Query results are output by Reactions as soon as they happen. 
+**✅ Checkpoint**: You've created your first Source, Continuous Query, and Reaction. You know how to view the current result set of a Continuous Query through the REST API. And you've also seen how changes in the database flow into Drasi Server and notification of changes to Continuous Query results are output by Reactions as soon as they happen.
 
 ---
 
 ## Step 4: Add a Query with Criteria {#phase-2}
 
-The `all-messages` Continuous Query is very simple and includes all messages written to the Message table. Now you'll add a second Continuous Query that answers the question "Who sent messages containing 'Hello World'?". You will add the new `hello-world-senders` Continuous Query using the Drasi Server REST API so you learn how to extend your configuration without restarting Drasi Server. 
+The `all-messages` Continuous Query is very simple and includes all messages written to the Message table. Now you'll add a second Continuous Query that answers the question "Who sent messages containing 'Hello World'?". You will add the new `hello-world-senders` Continuous Query using the Drasi Server REST API so you learn how to extend your configuration without restarting Drasi Server.
 
 ### The hello-world-senders Query
 
@@ -578,7 +576,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
 
 Watch the console and you will see notifications for both the `all-messages` and `hello-world-senders` queries — the new message is part of both query result sets:
 
-```
+```text
 [log-reaction] Query 'hello-world-senders' (1 items):
 [log-reaction]   [ADD] {"Id":"6","Sender":"Alice"}
 [log-reaction] Query 'all-messages' (1 items):
@@ -594,7 +592,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
 
 The console shows the new message in the `all-messages` query, but there is no notification for the `hello-world-senders` query because the new message doesn't meet the query's `WHERE` criteria and so isn't part of that query's result set:
 
-```
+```text
 [log-reaction] Query 'all-messages' (1 items):
 [log-reaction]   [ADD] {"From":"Bob","Message":"Goodbye World","MessageId":"7"}
 ```
@@ -694,7 +692,7 @@ Watch the SSE CLI terminal — you'll see the count update:
 }
 ```
 
-The count for "Hello World" incremented from 2 to 3. 
+The count for "Hello World" incremented from 2 to 3.
 
 Now delete Eve's message:
 
@@ -820,7 +818,7 @@ Press `Ctrl+C` to stop the SSE CLI.
 You built a complete change-driven solution from scratch:
 
 | Concept | What You Did |
-|---------|-------------|
+| ------- | ------------ |
 | **Sources** | Created a PostgreSQL source to connect Drasi to your database |
 | **Queries** | Wrote 4 Continuous Queries: simple change detection, criteria-based selection, aggregation, and time-based detection |
 | **Reactions** | Configured a Log Reaction for console output and used the SSE CLI to stream query result changes to your terminal |

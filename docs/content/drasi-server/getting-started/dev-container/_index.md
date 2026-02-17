@@ -49,6 +49,7 @@ git clone https://github.com/drasi-project/drasi-server.git
 ```
 
 ## Step 2: Open Drasi Server in a VS Code Dev Container
+
 Once the cloning is complete, change to the newly created `drasi-server` folder and open it in VS Code:
 
 ```bash
@@ -92,7 +93,7 @@ If you see a "file not found" error, the build may not have completed. Check the
 
 ---
 
-## ✅ Environment Setup Complete!
+## ✅ Environment Setup Complete
 
 You now have Drasi Server accessible at `./bin/drasi-server` from the repository root.
 

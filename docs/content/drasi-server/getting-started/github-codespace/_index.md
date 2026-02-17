@@ -56,13 +56,13 @@ Verify that Drasi Server is accessible:
 
 You should see output showing the version number, for example:
 
-```
+```text
 drasi-server 0.1.0
 ```
 
 ---
 
-## ✅ Environment Setup Complete!
+## ✅ Environment Setup Complete
 
 You now have Drasi Server accessible at `./bin/drasi-server` from the repository root.
 
@@ -75,6 +75,7 @@ You now have Drasi Server accessible at `./bin/drasi-server` from the repository
 ### Port Forwarding
 
 The Codespace automatically forwards ports. Check the **Ports** tab to access:
+
 - Port 8180 (Drasi Server API)
 - Port 8181 (SSE stream)
 - Port 5532 (PostgreSQL)
@@ -84,6 +85,7 @@ If you can't connect, right-click the port and select **Port Visibility → Publ
 ### Stop the Codespace
 
 To save your free hours:
+
 1. Click **Codespaces** in the bottom-left corner
 2. Select **Stop Current Codespace**
 

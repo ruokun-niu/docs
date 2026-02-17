@@ -35,7 +35,7 @@ docker ps
 
 If Docker is running, you'll see a table with these headings showing running containers (even if no containers are running):
 
-```
+```text
 CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES
 ```
 
@@ -50,7 +50,7 @@ cargo --version
 
 If the Rust compiler and Cargo package manager are installed, you should see output like:
 
-```
+```text
 rustc 1.88.0 (6b00bc388 2025-06-23)
 cargo 1.88.0 (873a06493 2025-05-10)
 ```
@@ -88,7 +88,7 @@ Verify the binary works:
 
 You should see output showing the version number, for example:
 
-```
+```text
 drasi-server 0.1.0
 ```
 
@@ -106,8 +106,8 @@ export POSTGRES_HOST_PORT=5432
 
 ---
 
-## ✅ Environment Setup Complete!
+## ✅ Environment Setup Complete
 
 You now have Drasi Server accessible at `./bin/drasi-server` from the repository root.
 
-<p><a href="../#database" class="btn btn-success btn-lg">Continue with the Tutorial <i class="fas fa-arrow-right ms-2"></i></a></p>
+<p><a href="../#database" class="btn btn-success btn-lg">Continue with the Tutorial <i class="fas fa-arrow-right ms-2"></i></a></p

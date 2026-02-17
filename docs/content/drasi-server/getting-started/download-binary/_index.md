@@ -25,7 +25,7 @@ docker ps
 
 If Docker is running, you'll see a table with these headings showing running containers (even if no containers are running):
 
-```
+```text
 CONTAINER ID   IMAGE   COMMAND   CREATED   STATUS   PORTS   NAMES
 ```
 
@@ -77,7 +77,7 @@ Verify the binary works:
 
 You should see output showing the version number, for example:
 
-```
+```text
 drasi-server 0.1.0
 ```
 
@@ -86,7 +86,6 @@ drasi-server 0.1.0
 ## Step 4: Download the Tutorial Files
 
 TODO
-
 
 ## Step 5: Set Environment Variables
 
@@ -100,7 +99,7 @@ export POSTGRES_HOST_PORT=5432
 
 ---
 
-## ✅ Environment Setup Complete!
+## ✅ Environment Setup Complete
 
 You now have Drasi Server accessible at `./bin/drasi-server` from the repository root.
 
