@@ -11,9 +11,9 @@ Build Drasi Server from source. This approach is ideal for contributors or if yo
 ## Prerequisites
 
 - **Git** — Needed to clone the Drasi Server code (<a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Install Git</a>)
-- **Docker** — Needed to run the PostgreSQL database used in the tutorial. The easiest way to get started depends on your platform:
-  - **Mac/Windows**: Install <a href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener noreferrer">Docker Desktop</a>
-  - **Linux**: Install <a href="https://docs.docker.com/engine/install/" target="_blank" rel="noopener noreferrer">Docker Engine</a> (recommended) or <a href="https://docs.docker.com/desktop/setup/install/linux/" target="_blank" rel="noopener noreferrer">Docker Desktop</a>
+- **Docker** and **Docker Compose** — Needed to run the PostgreSQL database used in the tutorial. The easiest way to get started depends on your platform:
+  - **Mac/Windows**: Install <a href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener noreferrer">Docker Desktop</a> (includes Docker Compose)
+  - **Linux**: Install <a href="https://docs.docker.com/engine/install/" target="_blank" rel="noopener noreferrer">Docker Engine</a> and the <a href="https://docs.docker.com/compose/install/linux/" target="_blank" rel="noopener noreferrer">Docker Compose plugin</a>, or install <a href="https://docs.docker.com/desktop/setup/install/linux/" target="_blank" rel="noopener noreferrer">Docker Desktop</a> (includes Docker Compose)
   - Recommended resources: 4+ CPU cores, 8+ GB memory
 - **Rust 1.88+** — For building Drasi Server <a href="https://rustup.rs/" target="_blank" rel="noopener noreferrer">(Install via rustup)</a>
 - **Text Editor** — Needed to edit files during the tutorial (e.g. <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a>)
