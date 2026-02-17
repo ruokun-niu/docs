@@ -915,41 +915,16 @@ The `-v` flag removes the persistent volume. Without it, the database data persi
 
 ## Next Steps
 
-<div class="card-grid">
-  <a href="/concepts/overview/">
-    <div class="unified-card unified-card--concepts">
-      <div class="unified-card-icon"><i class="fas fa-lightbulb"></i></div>
-      <div class="unified-card-content">
-        <h3 class="unified-card-title">Understand Drasi Concepts</h3>
-        <p class="unified-card-summary">Understand how Drasi works under the hood</p>
-      </div>
-    </div>
-  </a>
-  <a href="../how-to-guides/configuration/configure-sources/">
-    <div class="unified-card unified-card--howto">
-      <div class="unified-card-icon"><i class="fas fa-database"></i></div>
-      <div class="unified-card-content">
-        <h3 class="unified-card-title">Configure Sources</h3>
-        <p class="unified-card-summary">Detect changes in PostgreSQL, HTTP, gRPC, and more</p>
-      </div>
-    </div>
-  </a>
-  <a href="../how-to-guides/configuration/configure-queries/">
-    <div class="unified-card unified-card--howto">
-      <div class="unified-card-icon"><i class="fas fa-search"></i></div>
-      <div class="unified-card-content">
-        <h3 class="unified-card-title">Configure Queries</h3>
-        <p class="unified-card-summary">Write advanced Continuous Queries in GQL and openCypher</p>
-      </div>
-    </div>
-  </a>
-  <a href="../how-to-guides/configuration/configure-reactions/">
-    <div class="unified-card unified-card--howto">
-      <div class="unified-card-icon"><i class="fas fa-bolt"></i></div>
-      <div class="unified-card-content">
-        <h3 class="unified-card-title">Configure Reactions</h3>
-        <p class="unified-card-summary">React to changes using SSE, gRPC, Stored Procedures, and more</p>
-      </div>
-    </div>
-  </a>
-</div>
+Now that you understand the core Drasi concepts, here are some things you can do next:
+
+- **Deepen your understanding** — Read the <a href="/concepts/overview/" target="_blank" rel="noopener noreferrer">Drasi Concepts</a> to understand how Drasi works under the hood.
+- **Build a change-driven POC** — Try connecting Drasi Server to one of your own databases and build a proof-of-concept to test it on a real problem.
+- **Configure Sources** — Learn how to <a href="../how-to-guides/configuration/configure-sources/" target="_blank" rel="noopener noreferrer">detect changes in PostgreSQL, HTTP, gRPC, and more</a>.
+- **Configure Queries** — Learn how to <a href="../how-to-guides/configuration/configure-queries/" target="_blank" rel="noopener noreferrer">write advanced Continuous Queries in GQL and openCypher</a>.
+- **Configure Reactions** — Learn how to <a href="../how-to-guides/configuration/configure-reactions/" target="_blank" rel="noopener noreferrer">react to changes using SSE, gRPC, Stored Procedures, and more</a>.
+- **Explore drasi-lib** — Use the <a href="/drasi-lib/" target="_blank" rel="noopener noreferrer">drasi-lib Rust crate</a> to embed Drasi capabilities directly in your Rust applications.
+- **Try Drasi for Kubernetes** — Deploy Drasi as a managed service on Kubernetes with <a href="/drasi-kubernetes/" target="_blank" rel="noopener noreferrer">Drasi for Kubernetes</a>.
+- **Walk through a tutorial** — Follow one of the <a href="/drasi-kubernetes/tutorials/" target="_blank" rel="noopener noreferrer">end-to-end tutorials</a> to see Drasi in action on realistic scenarios.
+- **Contribute to Drasi** — Explore the <a href="https://github.com/drasi-project" target="_blank" rel="noopener noreferrer">Drasi project on GitHub</a> and read the <a href="https://github.com/drasi-project/drasi-server/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing Guide</a> to start contributing.
+- **Join the conversation** — Connect with the Drasi community on <a href="https://aka.ms/drasidiscord" target="_blank" rel="noopener noreferrer">Discord</a>.
+- **Follow Drasi** — Stay up to date on <a href="https://x.com/drasi_project" target="_blank" rel="noopener noreferrer">X</a>, <a href="https://www.youtube.com/@DrasiProject" target="_blank" rel="noopener noreferrer">YouTube</a>, and <a href="https://bsky.app/profile/drasi-project.bsky.social" target="_blank" rel="noopener noreferrer">Bluesky</a>.
