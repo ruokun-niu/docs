@@ -59,11 +59,13 @@ code .
 
 > **Tip:** If you are using VS Code Insiders, use `code-insiders .` instead of `code .` to open the folder.
 
-When VS Code opens, look for a notification that says: **"Folder contains a Dev Container configuration file. Reopen folder to develop in a container."**
+When VS Code opens, look for a notification that says: **Folder contains a Dev Container configuration file. Reopen folder to develop in a container.**
 
 Click **Reopen in Container**.
 
-> **Note**: If you don't see the notification described, press `F1` and type "Dev Containers: Reopen in Container". Then press enter to run the command. If prompted, select "Drasi Server - Getting Started Tutorial" from the list of configurations.
+VS Code will display a list of available Dev Container configurations. Select **Drasi Server - Getting Started Tutorial** from the list.
+
+> **Note**: If you don't see the notification described, press `F1` and type "Dev Containers: Reopen in Container". Then press enter to run the command then select "Drasi Server - Getting Started Tutorial" from the list of configurations.
 
 The container takes several minutes to build on first run. During this time the setup script will:
 
@@ -71,7 +73,7 @@ The container takes several minutes to build on first run. During this time the 
 2. Install a PostgreSQL client for use during the tutorial.
 3. Install `curl`, which is used in later tutorial steps.
 
-Watch the terminal for: **"Drasi Server Getting Started tutorial environment is ready!"**
+Watch the terminal for: **✅ Drasi Server Getting Started tutorial environment is ready!**
 
 This indicates the container is ready to use.
 

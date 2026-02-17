@@ -40,7 +40,7 @@ The Codespace takes a few minutes to initialize. During this time the setup scri
 2. Install a PostgreSQL client for use during the tutorial.
 3. Install `curl`, which is used in later tutorial steps.
 
-Watch the terminal for: **"Drasi Server Getting Started tutorial environment is ready!"**
+Watch the terminal for: **✅ Drasi Server Getting Started tutorial environment is ready!**
 
 This indicates the container is ready to use.
 
