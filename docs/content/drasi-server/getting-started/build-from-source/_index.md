@@ -99,26 +99,21 @@ sudo apt-get update && sudo apt-get install -y \
 {{< /tab >}}
 {{< tab header="Windows" lang="powershell" >}}
 # Building from source on Windows requires MSYS2 for the jq C library.
-# These steps use both the MSYS2 UCRT64 terminal and PowerShell.
+# Run all steps below from PowerShell.
 
 # ── Step 1: Install MSYS2 ──────────────────────────────────────────────────
-# Download and install MSYS2 from https://www.msys2.org/
-# Accept the default install location (C:\msys64)
+winget install MSYS2.MSYS2
 
-# ── Step 2: Install dependencies (run in the "MSYS2 UCRT64" terminal) ──────
-pacman -S --noconfirm `
-  mingw-w64-ucrt-x86_64-pkg-config `
-  mingw-w64-ucrt-x86_64-clang `
-  mingw-w64-ucrt-x86_64-jq `
-  mingw-w64-ucrt-x86_64-oniguruma
+# ── Step 2: Add MSYS2 to PATH ──────────────────────────────────────────────
+$env:PATH = "C:\Strawberry\perl\bin;C:\msys64\ucrt64\bin;C:\msys64\usr\bin;" + $env:PATH
 
-# ── Step 3: Run the following in PowerShell ────────────────────────────────
+# ── Step 3: Install dependencies via MSYS2 ─────────────────────────────────
+pacman -S --noconfirm mingw-w64-ucrt-x86_64-pkg-config mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-jq mingw-w64-ucrt-x86_64-oniguruma
+
+# ── Step 4: Configure the build environment ────────────────────────────────
 
 # Switch Rust to the GNU toolchain (required to link against MSYS2 libraries)
-rustup default stable-x86_64-pc-windows-gnu
-
-# Add MSYS2 binaries to PATH so the linker can find them
-$env:PATH = "C:\msys64\ucrt64\bin;" + $env:PATH
+rustup default 1.88-x86_64-pc-windows-gnu
 
 # Tell cargo where to find the libjq library
 $env:JQ_LIB_DIR = "C:\msys64\ucrt64\lib"
