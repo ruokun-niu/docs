@@ -22,11 +22,13 @@ curl -fsSL https://github.com/ruokun-niu/drasi-server/releases/latest/download/d
 chmod +x bin/drasi-server
 {{< /tab >}}
 {{< tab header="Linux musl (x64)" lang="bash" >}}
+apk add --no-cache libstdc++ libgcc
 mkdir -p bin
 curl -fsSL https://github.com/ruokun-niu/drasi-server/releases/latest/download/drasi-server-VERSION-x86_64-unknown-linux-musl -o bin/drasi-server
 chmod +x bin/drasi-server
 {{< /tab >}}
 {{< tab header="Linux musl (ARM64)" lang="bash" >}}
+apk add --no-cache libstdc++ libgcc
 mkdir -p bin
 curl -fsSL https://github.com/ruokun-niu/drasi-server/releases/latest/download/drasi-server-VERSION-aarch64-unknown-linux-musl -o bin/drasi-server
 chmod +x bin/drasi-server
