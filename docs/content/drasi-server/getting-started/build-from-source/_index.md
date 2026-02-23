@@ -57,6 +57,58 @@ cargo 1.88.0 (873a06493 2025-05-10)
 
 With the prerequisites verified, you're ready to clone the repository and build Drasi Server from source.
 
+## Build-from-Source Prerequisites
+
+Building `drasi-server` requires the Rust toolchain and several native C libraries.
+
+
+### macOS
+
+Xcode Command Line Tools provide `clang` and `perl`. Install the remaining dependencies with Homebrew:
+
+```bash
+brew install protobuf
+```
+
+### Debian / Ubuntu
+
+`perl` is pre-installed. Install everything else with:
+
+```bash
+sudo apt-get install -y libssl-dev pkg-config clang libclang-dev libjq-dev libonig-dev protobuf-compiler 
+```
+
+### Windows
+
+Building natively on Windows requires LLVM, Strawberry Perl, protoc, and optionally MSYS2 for jq.
+
+#### 1. LLVM (clang / libclang)
+```powershell
+winget install LLVM.LLVM
+```
+
+Set the environment variable (if not automatically added to PATH):
+
+```powershell
+$env:LIBCLANG_PATH = "C:\Program Files\LLVM\bin"
+```
+
+#### 2. Perl (Strawberry Perl)
+```powershell
+winget install StrawberryPerl.StrawberryPerl
+```
+
+#### 3. Protocol Buffers Compiler (protoc)
+```powershell
+winget install Google.Protobuf
+```
+
+If `protoc` is not on your PATH after installation, set the environment variable:
+
+```powershell
+$env:PROTOC = "C:\path\to\protoc.exe"
+```
+
 ## Step 1: Clone Drasi Server Repo
 
 Clone the <a href="https://github.com/drasi-project/drasi-server" target="_blank" rel="noopener noreferrer">Drasi Server repository</a>. In a terminal, run:
@@ -67,10 +119,82 @@ git clone https://github.com/drasi-project/drasi-server.git
 
 ## Step 2: Build Drasi Server
 
-Once the cloning is complete, change to the newly created `drasi-server` folder and build Drasi Server:
+Once the cloning is complete, change to the newly created `drasi-server` folder.
 
 ```bash
 cd drasi-server
+```
+
+### Build Configuration: jq Middleware
+
+The default `Cargo.toml` enables the `middleware-jq` feature on the `drasi-lib` dependency, which requires the **libjq** C library to be available at build time. If you don't have libjq installed, the build will fail with a jq-related error.
+
+You have two options:
+
+**Option A: Install libjq and set `JQ_LIB_DIR`**
+
+{{< tabpane persist="header" >}}
+{{< tab header="macOS" lang="bash" >}}
+brew install jq
+{{< /tab >}}
+{{< tab header="Debian/Ubuntu" lang="bash" >}}
+sudo apt-get update && sudo apt-get install -y \
+  pkg-config \
+  clang \
+  libclang-dev \
+  libjq-dev \
+  libonig-dev
+{{< /tab >}}
+{{< tab header="Windows" lang="powershell" >}}
+# Building from source on Windows requires MSYS2 for the jq C library.
+# These steps use both the MSYS2 UCRT64 terminal and PowerShell.
+
+# ── Step 1: Install MSYS2 ──────────────────────────────────────────────────
+# Download and install MSYS2 from https://www.msys2.org/
+# Accept the default install location (C:\msys64)
+
+# ── Step 2: Install dependencies (run in the "MSYS2 UCRT64" terminal) ──────
+pacman -S --noconfirm `
+  mingw-w64-ucrt-x86_64-pkg-config `
+  mingw-w64-ucrt-x86_64-clang `
+  mingw-w64-ucrt-x86_64-jq `
+  mingw-w64-ucrt-x86_64-oniguruma
+
+# ── Step 3: Run the following in PowerShell ────────────────────────────────
+
+# Switch Rust to the GNU toolchain (required to link against MSYS2 libraries)
+rustup default stable-x86_64-pc-windows-gnu
+
+# Add MSYS2 binaries to PATH so the linker can find them
+$env:PATH = "C:\msys64\ucrt64\bin;" + $env:PATH
+
+# Tell cargo where to find the libjq library
+$env:JQ_LIB_DIR = "C:\msys64\ucrt64\lib"
+
+{{< /tab >}}
+{{< /tabpane >}}
+
+**Option B: Disable the jq middleware**
+
+If you don't need the jq middleware, remove `"middleware-jq"` from the `drasi-lib` features list in `Cargo.toml`:
+
+```toml
+drasi-lib = { version = "0.3.8", features = [
+  # "middleware-jq",    # Remove or comment out this line
+  "middleware-decoder",
+  "middleware-map",
+  "middleware-parse-json",
+  "middleware-promote",
+  "middleware-relabel",
+  "middleware-unwind",
+] }
+```
+
+### Run the Build
+
+Once the jq configuration is resolved, build and install:
+
+```bash
 cargo install --path . --root . --locked
 ```
 
