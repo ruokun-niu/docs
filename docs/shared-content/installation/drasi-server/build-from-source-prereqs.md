@@ -1,4 +1,4 @@
-Building `drasi-server` requires the Rust toolchain and several native C libraries.
+Building `drasi-server` requires several native C libraries. Install the dependencies for your platform:
 
 
 ### macOS

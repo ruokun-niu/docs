@@ -18,6 +18,7 @@ Build Drasi Server from source. This approach is ideal for contributors or if yo
 - **Rust 1.88+** — For building Drasi Server <a href="https://rustup.rs/" target="_blank" rel="noopener noreferrer">(Install via rustup)</a>
 - **Text Editor** — Needed to edit files during the tutorial (e.g. <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a>)
 - **curl** — Used in later tutorial steps <a href="https://curl.se/download.html" target="_blank" rel="noopener noreferrer">(Install curl)</a>
+- **Native build dependencies** — Platform-specific C libraries required to compile Drasi Server (see [Install Native Build Dependencies](#install-native-build-dependencies) below)
 
 #### Verify Git is Installed
 
@@ -55,11 +56,11 @@ rustc 1.88.0 (6b00bc388 2025-06-23)
 cargo 1.88.0 (873a06493 2025-05-10)
 ```
 
-With the prerequisites verified, you're ready to clone the repository and build Drasi Server from source.
-
-## Build-from-Source Prerequisites
+#### Install Native Build Dependencies
 
 {{< read file="/shared-content/installation/drasi-server/build-from-source-prereqs.md" >}}
+
+With the prerequisites verified, you're ready to clone the repository and build Drasi Server from source.
 
 ## Step 1: Clone Drasi Server Repo
 
