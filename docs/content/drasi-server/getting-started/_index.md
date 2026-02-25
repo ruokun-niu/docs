@@ -142,9 +142,14 @@ NOTICE:  Replication slot: drasi_slot
 
 Verify the sample data was loaded:
 
-```bash
+{{< tabpane persist="header" >}}
+{{< tab header="bash / zsh" lang="bash" >}}
 docker exec getting-started-postgres psql -U drasi_user -d getting_started -c 'SELECT * FROM "Message";'
-```
+{{< /tab >}}
+{{< tab header="PowerShell" lang="powershell" >}}
+docker exec getting-started-postgres psql -U drasi_user -d getting_started -c "SELECT * FROM `"Message`";"
+{{< /tab >}}
+{{< /tabpane >}}
 
 You should see the 4 sample messages:
 
