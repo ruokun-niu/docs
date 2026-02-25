@@ -62,6 +62,13 @@ export SSE_PORT=8081
 export POSTGRES_HOST_PORT=5432
 ```
 
+## Step 5: Create Docker network
+
+Create a Docker network so that Drasi Server and the tutorial database container can communicate with each other:
+
+```bash
+docker network create drasi-network
+```
 ---
 
 ## ✅ Environment Setup Complete
