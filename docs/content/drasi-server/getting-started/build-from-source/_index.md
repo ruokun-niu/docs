@@ -99,24 +99,15 @@ sudo apt-get update && sudo apt-get install -y \
   libonig-dev
 {{< /tab >}}
 {{< tab header="Windows" lang="powershell" >}}
-# Building from source on Windows requires MSYS2 for the jq C library.
-# Run all steps below from PowerShell.
+# Install libjq via MSYS2
+$env:PATH = "C:\msys64\ucrt64\bin;C:\msys64\usr\bin;" + $env:PATH
 
-# ── Step 1: Install MSYS2 ──────────────────────────────────────────────────
-winget install MSYS2.MSYS2
+pacman -S --noconfirm `
+    mingw-w64-ucrt-x86_64-jq `
+    mingw-w64-ucrt-x86_64-oniguruma
 
-# ── Step 2: Add MSYS2 to PATH ──────────────────────────────────────────────
-$env:PATH = "C:\Strawberry\perl\bin;C:\msys64\ucrt64\bin;C:\msys64\usr\bin;" + $env:PATH
-
-# ── Step 3: Install dependencies via MSYS2 ─────────────────────────────────
-pacman -S --noconfirm mingw-w64-ucrt-x86_64-pkg-config mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-jq mingw-w64-ucrt-x86_64-oniguruma
-
-# ── Step 4: Configure the build environment ────────────────────────────────
-
-
-# Tell cargo where to find the libjq library
+# Set the library path — tell jq-sys where to find libjq
 $env:JQ_LIB_DIR = "C:\msys64\ucrt64\lib"
-
 {{< /tab >}}
 {{< /tabpane >}}
 
