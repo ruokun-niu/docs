@@ -19,7 +19,14 @@ sudo apt-get install -y libssl-dev pkg-config clang libclang-dev libjq-dev libon
 
 ### Windows
 
-Building natively on Windows requires LLVM, Strawberry Perl, protoc, and optionally MSYS2 for jq.
+Building natively on Windows requires LLVM, Strawberry Perl, protoc.
+
+#### Switch Rust to the GNU toolchain (required to link against MSYS2 libraries)
+
+```powershell
+rustup default 1.88-x86_64-pc-windows-gnu
+$env:RUSTUP_TOOLCHAIN = "1.88.0-x86_64-pc-windows-gnu"
+```
 
 #### 1. LLVM (clang / libclang)
 ```powershell

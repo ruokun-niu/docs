@@ -113,8 +113,6 @@ pacman -S --noconfirm mingw-w64-ucrt-x86_64-pkg-config mingw-w64-ucrt-x86_64-cla
 
 # ── Step 4: Configure the build environment ────────────────────────────────
 
-# Switch Rust to the GNU toolchain (required to link against MSYS2 libraries)
-rustup default 1.88-x86_64-pc-windows-gnu
 
 # Tell cargo where to find the libjq library
 $env:JQ_LIB_DIR = "C:\msys64\ucrt64\lib"
