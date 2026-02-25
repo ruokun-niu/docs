@@ -751,6 +751,39 @@ Build the SSE CLI:
 cd examples/sse-cli && cargo build --release && cd ../..
 ```
 
+Alternatively, if you don't have Cargo installed, you can download a pre-built binary. Replace `VERSION` with the desired version (e.g., `0.1.9`):
+
+{{< tabpane persist="header" >}}
+{{< tab header="macOS (Apple Silicon)" lang="bash" >}}
+curl -fsSL https://github.com/drasi-project/drasi-server/releases/download/VERSION/drasi-sse-cli-VERSION-aarch64-apple-darwin -o examples/sse-cli/target/release/drasi-sse-cli
+chmod +x examples/sse-cli/target/release/drasi-sse-cli
+{{< /tab >}}
+{{< tab header="macOS (Intel)" lang="bash" >}}
+curl -fsSL https://github.com/drasi-project/drasi-server/releases/download/VERSION/drasi-sse-cli-VERSION-x86_64-apple-darwin -o examples/sse-cli/target/release/drasi-sse-cli
+chmod +x examples/sse-cli/target/release/drasi-sse-cli
+{{< /tab >}}
+{{< tab header="Linux (x64)" lang="bash" >}}
+curl -fsSL https://github.com/drasi-project/drasi-server/releases/download/VERSION/drasi-sse-cli-VERSION-x86_64-linux-gnu -o examples/sse-cli/target/release/drasi-sse-cli
+chmod +x examples/sse-cli/target/release/drasi-sse-cli
+{{< /tab >}}
+{{< tab header="Linux (ARM64)" lang="bash" >}}
+curl -fsSL https://github.com/drasi-project/drasi-server/releases/download/VERSION/drasi-sse-cli-VERSION-aarch64-linux-gnu -o examples/sse-cli/target/release/drasi-sse-cli
+chmod +x examples/sse-cli/target/release/drasi-sse-cli
+{{< /tab >}}
+{{< tab header="Linux musl (x64)" lang="bash" >}}
+curl -fsSL https://github.com/drasi-project/drasi-server/releases/download/VERSION/drasi-sse-cli-VERSION-x86_64-linux-musl -o examples/sse-cli/target/release/drasi-sse-cli
+chmod +x examples/sse-cli/target/release/drasi-sse-cli
+{{< /tab >}}
+{{< tab header="Linux musl (ARM64)" lang="bash" >}}
+curl -fsSL https://github.com/drasi-project/drasi-server/releases/download/VERSION/drasi-sse-cli-VERSION-aarch64-linux-musl -o examples/sse-cli/target/release/drasi-sse-cli
+chmod +x examples/sse-cli/target/release/drasi-sse-cli
+{{< /tab >}}
+{{< tab header="Windows (x64)" lang="powershell" >}}
+New-Item -ItemType Directory -Force -Path examples\sse-cli\target\release
+Invoke-WebRequest -Uri "https://github.com/drasi-project/drasi-server/releases/download/VERSION/drasi-sse-cli-VERSION-x86_64-windows.exe" -OutFile "examples\sse-cli\target\release\drasi-sse-cli.exe"
+{{< /tab >}}
+{{< /tabpane >}}
+
 ### Stream the message-counts Query
 
 In a **new terminal**, start the SSE CLI to stream changes from the `message-counts` query:
