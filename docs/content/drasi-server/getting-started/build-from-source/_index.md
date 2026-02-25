@@ -159,11 +159,18 @@ drasi-server 0.1.0
 
 The tutorial uses environment variables for various port numbers so the same commands work across all setup environments. Run the following to set the required environment variables:
 
-```bash
+{{< tabpane persist="header" >}}
+{{< tab header="bash / zsh" lang="bash" >}}
 export SERVER_PORT=8080
 export SSE_PORT=8081
 export POSTGRES_HOST_PORT=5432
-```
+{{< /tab >}}
+{{< tab header="PowerShell" lang="powershell" >}}
+$env:SERVER_PORT = "8080"
+$env:SSE_PORT = "8081"
+$env:POSTGRES_HOST_PORT = "5432"
+{{< /tab >}}
+{{< /tabpane >}}
 
 ## Step 5: Create Docker network
 

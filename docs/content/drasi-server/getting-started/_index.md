@@ -780,7 +780,7 @@ chmod +x examples/sse-cli/target/release/sse-cli
 {{< /tab >}}
 {{< tab header="Windows (x64)" lang="powershell" >}}
 New-Item -ItemType Directory -Force -Path examples\sse-cli\target\release
-Invoke-WebRequest -Uri "https://github.com/drasi-project/drasi-server/releases/download/VERSION/drasi-sse-cli-VERSION-x86_64-windows.exe" -OutFile "examples\sse-cli\target\release\sse-cli.exe"
+Invoke-WebRequest -Uri "https://github.com/ruokun-niu/drasi-server/releases/download/0.1.9/drasi-sse-cli-0.1.9-x86_64-windows.exe" -OutFile "examples\sse-cli\target\release\sse-cli.exe"
 {{< /tab >}}
 {{< /tabpane >}}
 
