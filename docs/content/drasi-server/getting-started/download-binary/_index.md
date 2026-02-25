@@ -58,9 +58,9 @@ export SSE_PORT=8081
 export POSTGRES_HOST_PORT=5432
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-$env:SERVER_PORT = "8080"
-$env:SSE_PORT = "8081"
-$env:POSTGRES_HOST_PORT = "5432"
+$env:SERVER_PORT = 8080
+$env:SSE_PORT = 8081
+$env:POSTGRES_HOST_PORT = 5432
 {{< /tab >}}
 {{< /tabpane >}}
 
