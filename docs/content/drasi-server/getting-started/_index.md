@@ -147,7 +147,7 @@ Verify the sample data was loaded:
 docker exec getting-started-postgres psql -U drasi_user -d getting_started -c 'SELECT * FROM "Message";'
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec getting-started-postgres psql -U drasi_user -d getting_started -c "SELECT * FROM `"Message`";"
+docker exec getting-started-postgres psql -U drasi_user -d getting_started -c "SELECT * FROM \""Message\"";"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -452,7 +452,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
   "INSERT INTO \"Message\" (\"From\", \"Message\") VALUES ('You', 'My first message!');"
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO `"Message`" (`"From`", `"Message`") VALUES ('You', 'My first message!');"
+docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO \""Message\"" (\""From\"", \""Message\"") VALUES ('You', 'My first message!');"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -475,7 +475,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
   "UPDATE \"Message\" SET \"Message\" = 'My first UPDATED message!' WHERE \"MessageId\" = 5;"
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "UPDATE `"Message`" SET `"Message`" = 'My first UPDATED message!' WHERE `"MessageId`" = 5;"
+docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "UPDATE \""Message\"" SET \""Message\"" = 'My first UPDATED message!' WHERE \""MessageId\"" = 5;"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -496,7 +496,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
   "DELETE FROM \"Message\" WHERE \"MessageId\" = 5;"
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "DELETE FROM `"Message`" WHERE `"MessageId`" = 5;"
+docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "DELETE FROM \""Message\"" WHERE \""MessageId\"" = 5;"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -652,7 +652,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
   "INSERT INTO \"Message\" (\"From\", \"Message\") VALUES ('Alice', 'Hello World');"
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO `"Message`" (`"From`", `"Message`") VALUES ('Alice', 'Hello World');"
+docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO \""Message\"" (\""From\"", \""Message\"") VALUES ('Alice', 'Hello World');"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -673,7 +673,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
   "INSERT INTO \"Message\" (\"From\", \"Message\") VALUES ('Bob', 'Goodbye World');"
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO `"Message`" (`"From`", `"Message`") VALUES ('Bob', 'Goodbye World');"
+docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO \""Message\"" (\""From\"", \""Message\"") VALUES ('Bob', 'Goodbye World');"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -785,7 +785,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
   "INSERT INTO \"Message\" (\"From\", \"Message\") VALUES ('Eve', 'Hello World');"
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO `"Message`" (`"From`", `"Message`") VALUES ('Eve', 'Hello World');"
+docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO \""Message\"" (\""From\"", \""Message\"") VALUES ('Eve', 'Hello World');"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -821,7 +821,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
   "DELETE FROM \"Message\" WHERE \"From\" = 'Eve';"
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "DELETE FROM `"Message`" WHERE `"From`" = 'Eve';"
+docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "DELETE FROM \""Message\"" WHERE \""From\"" = 'Eve';"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -947,7 +947,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
   "INSERT INTO \"Message\" (\"From\", \"Message\") VALUES ('Alice', 'About to go inactive');"
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO `"Message`" (`"From`", `"Message`") VALUES ('Alice', 'About to go inactive');"
+docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO \""Message\"" (\""From\"", \""Message\"") VALUES ('Alice', 'About to go inactive');"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -977,7 +977,7 @@ docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -
   "INSERT INTO \"Message\" (\"From\", \"Message\") VALUES ('Alice', 'Active again');"
 {{< /tab >}}
 {{< tab header="PowerShell" lang="powershell" >}}
-docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO `"Message`" (`"From`", `"Message`") VALUES ('Alice', 'Active again');"
+docker exec -it getting-started-postgres psql -U drasi_user -d getting_started -c "INSERT INTO \""Message\"" (\""From\"", \""Message\"") VALUES ('Alice', 'Active again');"
 {{< /tab >}}
 {{< /tabpane >}}
 
