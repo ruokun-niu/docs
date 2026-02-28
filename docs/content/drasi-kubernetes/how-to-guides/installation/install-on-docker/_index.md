@@ -1,0 +1,107 @@
+---
+type: "docs"
+title: "Install on Docker"
+linkTitle: "Install on Docker"
+weight: 40
+description: >
+    Learn how to install Drasi to a Docker container for local development and testing
+related:
+  tutorials:
+    - title: "Getting Started with Drasi"
+      url: "/drasi-kubernetes/getting-started/"
+  concepts:
+    - title: "Why Drasi?"
+      url: "/concepts/overview/"
+  howto:
+    - title: "Configure Sources"
+      url: "/drasi-kubernetes/how-to-guides/configure-sources/"
+    - title: "Configure Reactions"
+      url: "/drasi-kubernetes/how-to-guides/configure-reactions/"
+  reference:
+    - title: "CLI Reference"
+      url: "/drasi-kubernetes/reference/command-line-interface/"
+---
+
+Installing Drasi into a Docker container is the fastest way to get started.  It will also allow you to connect to databases running on your local machine, by using the `host.docker.internal` host name.
+
+## Prerequisites
+
+On the computer where you will install Drasi, you need to install [Docker](https://www.docker.com/products/docker-desktop/)
+
+
+## Get the Drasi CLI
+{{< read file= "/shared-content/installation/drasi-cli/cli-installation.md" >}}
+
+## Install Drasi as a Docker container
+To install Drasi as a Docker container using all default settings, simply run the command:
+
+```text
+drasi init --docker
+```
+
+This will install the version of Drasi that matches the version of the Drasi CLI that you are using. The Drasi container images will be pulled from the main Drasi container registry located on **ghcr.io**.
+
+The `drasi init` command gives you control over certain aspects of the install process and the configuration of the Drasi environment through these flags and argument:
+
+- `--dapr-runtime-version <version>`: Specifies the Dapr runtime version to install.
+- `--dapr-sidecar-version <version>`: Specifies the Dapr sidecar (daprd) version to install.
+- `--docker <name (optional)>` (optional): If set, a Docker container will be created and a self-contained instance of drasi will be installed into it. You do not need a Kubernetes cluster or the kubectl tooling if using this option. You can optionally provide a name for the instance, the default will be `docker`.
+- `--local`: If set, the Drasi CLI will use locally available images to install Drasi instead of pulling them from a remote container registry. If used in conjunction with the `--docker` flag, it will also scan your local Docker cache for all images with the `drasi-project/` prefix and automatically load them into the self contained Drasi instance.
+- `--registry <registry>`: Address of the container registry to pull Drasi images from. The default value is "ghcr.io".
+- `--version <tag>`: Container image version tag to use when pulling Drasi images. The default value is the version tag of the Drasi CLI, which is available through the [drasi version](/reference/command-line-interface#drasi-version) command.
+
+For example, to install Drasi **0.2.0**, you would run the following command:
+
+```text
+drasi init --version 0.2.0 --docker
+```
+
+The following shows the output you would expect from a successful installation of Drasi 0.1.3:
+
+```
+Installing Drasi with version 0.2.0 from registry ghcr.io
+✓ Container 37951820a0d4a810cc3abd6ad9ef4ede4e075ad18f5708814da9cfe0cc23fb36 created
+✓ Container 37951820a0d4a810cc3abd6ad9ef4ede4e075ad18f5708814da9cfe0cc23fb36 started
+ℹ Dapr not installed
+✓ Dapr installed successfully
+✓ Infrastructure deployed
+  ✓ app=rg-redis is online
+  ✓ app=rg-mongo is online
+✓ Control plane is online
+  ✓ drasi/infra=api is online
+  ✓ drasi/infra=resource-provider is online
+✓ Query container created
+  ✓ Apply: QueryContainer/default: complete
+  ✓ Wait QueryContainer/default online
+✓ Default source providers created
+  ✓ Apply: SourceProvider/PostgreSQL: complete
+  ✓ Apply: SourceProvider/SQLServer: complete
+  ✓ Apply: SourceProvider/CosmosGremlin: complete
+✓ Default reaction providers created
+  ✓ Apply: ReactionProvider/Debug: complete
+  ✓ Apply: ReactionProvider/Debezium: complete
+  ✓ Apply: ReactionProvider/EventGrid: complete
+  ✓ Apply: ReactionProvider/Gremlin: complete
+  ✓ Apply: ReactionProvider/Result: complete
+  ✓ Apply: ReactionProvider/SignalR: complete
+  ✓ Apply: ReactionProvider/StorageQueue: complete
+  ✓ Apply: ReactionProvider/StoredProc: complete
+```
+
+If `drasi init` completes without error, the Drasi environment is ready for use and you can start to create {{< term "Source" "Sources" >}}, {{< term "Continuous Query" "Continuous Queries" >}}, and {{< term "Reaction" "Reactions" >}}.
+
+
+## Deleting the Drasi container
+To delete a Drasi environment that is installed in a Docker container, run the command:
+
+```
+drasi env delete docker
+```
+
+This command will remove the `docker` Drasi environment from the collection in your local user profile and prompt you to delete the container as well.
+
+```
+This will delete the Docker container, are you sure you want to continue? (y/N): y
+Deleting Docker container docker...
+Environment docker deleted
+```
