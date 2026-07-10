@@ -79,13 +79,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
-          node-version: '19'
+          node-version: '22'
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3.2.1
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
-          extended: true 
+          extended: true
 
       - name: Setup Docsy
         run: |
