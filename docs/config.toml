@@ -73,7 +73,11 @@ defaultContentLanguageInSubdir = false
     [[module.imports.mounts]]
       source = "tutorials/getting-started"
       target = "content/drasi-server/tutorials/getting-started"
-      excludeFiles = "/README.md"
+      # Exclude the tutorial README and the standalone HTML viewer app (served
+      # locally during the tutorial, not a docs page). Uses the current 'files'
+      # setting; the viewer must be excluded so Hugo doesn't treat its
+      # index.html as page content.
+      files = ['! /README.md', '! viewer/**']
 
 [params.search.algolia]
 appId = "Q8GYM4KCMH"

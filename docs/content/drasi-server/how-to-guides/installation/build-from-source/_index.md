@@ -8,6 +8,8 @@ related:
   howto:
     - title: "Docker Installation"
       url: "/drasi-server/how-to-guides/installation/install-with-docker/"
+    - title: "Install the SSE CLI"
+      url: "/drasi-server/how-to-guides/installation/install-sse-cli/"
     - title: "Configure Drasi Server"
       url: "/drasi-server/how-to-guides/configuration/configure-drasi-server/"
   reference:
@@ -45,27 +47,40 @@ git clone https://github.com/drasi-project/drasi-server.git
 cd drasi-server
 ```
 
-## Build Options
+## Build and Install Drasi Server
 
-### Debug Build
-
-For development and debugging (faster compile, slower runtime):
+Build Drasi Server and install the compiled binary into a local `./bin` directory:
 
 ```bash
-cargo build
+cargo install --path . --root . --locked
 ```
 
-The binary will be at `target/debug/drasi-server`.
+The first build downloads and compiles all dependencies, so it can take several minutes. Subsequent builds are much faster thanks to Cargo's build cache. The `--root .` flag tells Cargo to place the compiled `drasi-server` binary in the `./bin` directory.
 
-### Release Build
-
-For production use (optimized, faster runtime):
+### Verify the Build
 
 ```bash
-cargo build --release
+./bin/drasi-server --version
 ```
 
-The binary will be at `target/release/drasi-server`.
+You should see output showing the version number, for example:
+
+```text
+drasi-server 0.2.1
+rustc: rustc 1.88.0 (6b00bc388 2025-06-23)
+plugin-sdk: 0.9.1
+```
+
+{{% alert title="Iterating on the source code?" color="info" %}}
+If you are actively modifying Drasi Server, use `cargo build` for faster, incremental debug builds and run directly with Cargo instead of reinstalling each time:
+
+```bash
+cargo build                                # debug build at target/debug/drasi-server
+cargo run -- --config config/server.yaml   # build and run in one step
+```
+
+Add `--release` for an optimized build at `target/release/drasi-server`.
+{{% /alert %}}
 
 ## Configuration
 
@@ -78,7 +93,7 @@ Create a configuration yaml file for Drasi Server. See the [Configuration Refere
 Alternatively, use the `init` command to create a starter configuration file:
 
 ```bash
-cargo run --release -- init --output config/server.yaml
+./bin/drasi-server init --output config/server.yaml
 ```
 
 ### Validate Configuration
@@ -86,36 +101,25 @@ cargo run --release -- init --output config/server.yaml
 Check your configuration file without starting the server:
 
 ```bash
-cargo run --release -- validate --config config/server.yaml
+./bin/drasi-server validate --config config/server.yaml
 
 # Show resolved environment variables
-cargo run --release -- validate --config config/server.yaml --show-resolved
+./bin/drasi-server validate --config config/server.yaml --show-resolved
 ```
 
 ### Check System Dependencies
 
 ```bash
-cargo run --release -- doctor
+./bin/drasi-server doctor
 
 # Include optional dependencies
-cargo run --release -- doctor --all
+./bin/drasi-server doctor --all
 ```
 
 ## Run Drasi Server
 
-### Using Cargo
+Run Drasi Server using the installed binary:
 
 ```bash
-# Debug mode
-cargo run -- --config config/server.yaml
-
-# Release mode
-cargo run --release -- --config config/server.yaml
-```
-
-### Using the Binary Directly
-
-```bash
-# After building
-./target/release/drasi-server --config config/server.yaml
+./bin/drasi-server --config config/server.yaml
 ```
