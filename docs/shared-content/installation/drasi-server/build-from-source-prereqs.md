@@ -11,10 +11,11 @@ Then install the remaining dependencies with Homebrew:
 brew install protobuf jq oniguruma
 ```
 
-The build links against `libjq`, but the `jq-sys` crate cannot locate the Homebrew copy automatically and the build fails with `Unable to find libjq` unless you tell it where the library is. Set `JQ_LIB_DIR` in the same terminal you build from (add it to your shell profile to make it permanent):
+The build links against Homebrew's `libjq` and `libonig`, but these are not on the compiler's default search path (on Apple Silicon, Homebrew installs under `/opt/homebrew`), so the build fails with `Unable to find libjq` or `ld: library 'onig' not found` unless you point the toolchain at them. Set the following in the same terminal you build from (add them to your shell profile to make them permanent):
 
 ```bash {#macos-jq-lib-dir}
 export JQ_LIB_DIR="$(brew --prefix jq)/lib"
+export LIBRARY_PATH="$(brew --prefix jq)/lib:$(brew --prefix oniguruma)/lib:${LIBRARY_PATH:-}"
 ```
 
 #### Debian / Ubuntu
@@ -23,6 +24,12 @@ export JQ_LIB_DIR="$(brew --prefix jq)/lib"
 
 ```bash {#linux-native-deps}
 sudo apt-get install -y libssl-dev pkg-config clang libclang-dev libjq-dev libonig-dev protobuf-compiler 
+```
+
+The `libjq-dev` package does not ship a pkg-config file, so the `jq-sys` crate cannot locate `libjq` automatically and the build fails with `Unable to find libjq` unless you tell it where the library is. Set `JQ_LIB_DIR` to your architecture's multiarch library directory in the same terminal you build from (add it to your shell profile to make it permanent):
+
+```bash {#linux-jq-lib-dir}
+export JQ_LIB_DIR="/usr/lib/$(uname -m)-linux-gnu"
 ```
 
 #### Windows

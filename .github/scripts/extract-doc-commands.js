@@ -37,7 +37,7 @@ const BUILD_SEQUENCE = [
 
 const MANIFEST = {
   linux: {
-    prereqs: [[PREREQS, 'linux-native-deps']],
+    prereqs: [[PREREQS, 'linux-native-deps'], [PREREQS, 'linux-jq-lib-dir']],
     build: BUILD_SEQUENCE,
   },
   macos: {
