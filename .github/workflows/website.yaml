@@ -25,7 +25,7 @@ jobs:
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.155.3
+      HUGO_VERSION: 0.164.0
     steps:
       - name: Checkout docs repo
         uses: actions/checkout@v4
