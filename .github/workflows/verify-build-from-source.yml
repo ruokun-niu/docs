@@ -1,0 +1,100 @@
+name: Verify Build from Source
+
+# Validates that the "Build from Source" installation guide works on a clean
+# machine, across multiple OS/arch environments.
+#
+# This is a deterministic test (no AI agent required), but it does NOT hardcode
+# the documented commands: each step is extracted at runtime from the Markdown
+# docs by the stable id on its code fence (see
+# .github/scripts/extract-doc-commands.js). If the docs change, the workflow
+# runs the new commands automatically, so the two cannot silently drift apart.
+#
+# Docs under test:
+#   - docs/content/drasi-server/how-to-guides/installation/build-from-source/
+#   - docs/content/drasi-server/how-to-guides/installation/install-sse-cli/
+#   - docs/shared-content/installation/drasi-server/build-from-source-prereqs.md
+#
+# Related issue: https://github.com/drasi-project/docs/issues/259
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'docs/content/drasi-server/how-to-guides/installation/build-from-source/**'
+      - 'docs/content/drasi-server/how-to-guides/installation/install-sse-cli/**'
+      - 'docs/shared-content/installation/drasi-server/build-from-source-prereqs.md'
+      - 'docs/shared-content/installation/drasi-server/download-sse-cli-binary.md'
+      - '.github/scripts/extract-doc-commands.js'
+      - '.github/workflows/verify-build-from-source.yml'
+  schedule:
+    # Weekly, to catch upstream drasi-server changes that break the docs.
+    - cron: '0 6 * * 1'
+  push:
+    branches:
+      - drasi-server-installation
+
+# The guide requires Rust installed via rustup; it defers the install itself to
+# the rustup site, so the version below is the only value not read from a doc
+# code block. Keep it in sync with the version stated in the installation guide.
+env:
+  RUST_VERSION: '1.95.0'
+
+concurrency:
+  group: verify-build-from-source-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-from-source:
+    name: ${{ matrix.label }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux
+            label: Linux (Ubuntu)
+          - os: macos-latest
+            platform: macos
+            label: macOS (Apple Silicon)
+          - os: macos-13
+            platform: macos
+            label: macOS (Intel)
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      - name: Follow the Build from Source guide
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          echo "::group::Assemble script from documented commands"
+          # 1. Native build dependencies (extracted verbatim from the docs).
+          node .github/scripts/extract-doc-commands.js "${{ matrix.platform }}" prereqs > steps.sh
+
+          # 2. Rust toolchain. The guide requires >= ${RUST_VERSION} installed via
+          #    rustup, which is preinstalled on GitHub-hosted runners.
+          {
+            echo "rustup toolchain install ${RUST_VERSION}"
+            echo "rustup default ${RUST_VERSION}"
+            echo "rustc --version"
+            echo "cargo --version"
+          } >> steps.sh
+
+          # 3. Clone, build, verify, and build the SSE CLI (extracted from the docs).
+          node .github/scripts/extract-doc-commands.js "${{ matrix.platform }}" build >> steps.sh
+
+          echo "----- assembled script -----"
+          cat -n steps.sh
+          echo "----------------------------"
+          echo "::endgroup::"
+
+          # Run everything in a single shell so documented environment variables
+          # (e.g. JQ_LIB_DIR) and directory changes (cd drasi-server) persist,
+          # exactly as a user working in one terminal would experience.
+          bash -euo pipefail steps.sh

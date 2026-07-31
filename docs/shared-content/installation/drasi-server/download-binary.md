@@ -51,6 +51,6 @@ You should see output showing the version number. The exact version depends on w
 
 ```text
 drasi-server 0.2.1
-rustc: rustc 1.88.0 (6b00bc388 2025-06-23)
+rustc: rustc 1.95.0
 plugin-sdk: 0.9.1
 ```

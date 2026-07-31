@@ -36,7 +36,7 @@ cd drasi-server
 
 Build and install the SSE CLI into a local `./bin` directory:
 
-```bash
+```bash {#build-sse-cli}
 cargo install --path examples/sse-cli --root . --locked
 ```
 
@@ -44,7 +44,7 @@ The `--root .` flag tells Cargo to place the compiled `drasi-sse-cli` binary in 
 
 ### Verify the Build
 
-```bash
+```bash {#verify-sse-cli}
 ./bin/drasi-sse-cli --version
 ```
 

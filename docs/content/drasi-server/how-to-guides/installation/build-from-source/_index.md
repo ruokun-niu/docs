@@ -21,7 +21,7 @@ Building {{< term "Drasi Server" >}} from source gives you full control over the
 
 ## Prerequisites
 
-- [Rust](https://www.rust-lang.org/tools/install) 1.88 or later
+- [Rust](https://www.rust-lang.org/tools/install) 1.95 or later
 - Git
 - C compiler (for native dependencies)
 
@@ -36,13 +36,15 @@ rustc --version
 cargo --version
 ```
 
+Drasi Server requires **Rust 1.95 or later**, and building with an older toolchain will fail. Confirm `rustc --version` reports at least `1.95.0`; if it is older, update with `rustup update`.
+
 ### Native Dependencies
 
 {{< read file="/shared-content/installation/drasi-server/build-from-source-prereqs.md" >}}
 
 ## Clone the Drasi Server Repository
 
-```bash
+```bash {#clone-drasi-server}
 git clone https://github.com/drasi-project/drasi-server.git
 cd drasi-server
 ```
@@ -51,7 +53,7 @@ cd drasi-server
 
 Build Drasi Server and install the compiled binary into a local `./bin` directory:
 
-```bash
+```bash {#build-drasi-server}
 cargo install --path . --root . --locked
 ```
 
@@ -59,7 +61,7 @@ The first build downloads and compiles all dependencies, so it can take several 
 
 ### Verify the Build
 
-```bash
+```bash {#verify-drasi-server}
 ./bin/drasi-server --version
 ```
 
@@ -67,7 +69,7 @@ You should see output showing the version number, for example:
 
 ```text
 drasi-server 0.2.1
-rustc: rustc 1.88.0 (6b00bc388 2025-06-23)
+rustc: rustc 1.95.0
 plugin-sdk: 0.9.1
 ```
 
