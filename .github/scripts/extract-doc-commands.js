@@ -10,7 +10,7 @@
  *     ```
  *
  * Usage:
- *   node .github/scripts/extract-doc-commands.js <linux|macos> <prereqs|build>
+ *   node .github/scripts/extract-doc-commands.js <linux|macos|windows> <prereqs|build>
  *
  * Prints the concatenated command text (in documented order) to stdout.
  */
@@ -42,6 +42,10 @@ const MANIFEST = {
   },
   macos: {
     prereqs: [[PREREQS, 'macos-native-deps'], [PREREQS, 'macos-jq-lib-dir']],
+    build: BUILD_SEQUENCE,
+  },
+  windows: {
+    prereqs: [[PREREQS, 'windows-native-deps']],
     build: BUILD_SEQUENCE,
   },
 };
@@ -77,7 +81,7 @@ function main() {
   const groups = MANIFEST[platform];
   if (!groups || !groups[group]) {
     process.stderr.write(
-      'Usage: node .github/scripts/extract-doc-commands.js <linux|macos> <prereqs|build>\n'
+      'Usage: node .github/scripts/extract-doc-commands.js <linux|macos|windows> <prereqs|build>\n'
     );
     process.exit(2);
   }

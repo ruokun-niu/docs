@@ -59,9 +59,12 @@ jobs:
           - os: macos-latest
             platform: macos
             label: macOS (Apple Silicon)
-          - os: macos-13
+          - os: macos-26-intel
             platform: macos
             label: macOS (Intel)
+          - os: windows-latest
+            platform: windows
+            label: Windows
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
     steps:
@@ -69,6 +72,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Follow the Build from Source guide
+        if: matrix.platform != 'windows'
         shell: bash
         run: |
           set -euo pipefail
@@ -98,3 +102,37 @@ jobs:
           # (e.g. JQ_LIB_DIR) and directory changes (cd drasi-server) persist,
           # exactly as a user working in one terminal would experience.
           bash -euo pipefail steps.sh
+
+      - name: Follow the Build from Source guide (Windows)
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: |
+          Write-Output "::group::Assemble script from documented commands"
+
+          # Fail fast, including on any non-zero exit from a native command.
+          Set-Content steps.ps1 "`$ErrorActionPreference = 'Stop'"
+          Add-Content steps.ps1 "`$PSNativeCommandUseErrorActionPreference = `$true"
+
+          # 1. Native build dependencies (extracted verbatim from the docs).
+          node .github/scripts/extract-doc-commands.js "${{ matrix.platform }}" prereqs | Add-Content steps.ps1
+
+          # 2. Rust toolchain. On Windows the default host triple is
+          #    x86_64-pc-windows-msvc, so installing ${{ env.RUST_VERSION }}
+          #    matches the pinned MSVC toolchain the guide requires.
+          Add-Content steps.ps1 "rustup toolchain install $env:RUST_VERSION"
+          Add-Content steps.ps1 "rustup default $env:RUST_VERSION"
+          Add-Content steps.ps1 "rustc --version"
+          Add-Content steps.ps1 "cargo --version"
+
+          # 3. Clone, build, verify, and build the SSE CLI (extracted from the docs).
+          node .github/scripts/extract-doc-commands.js "${{ matrix.platform }}" build | Add-Content steps.ps1
+
+          Write-Output "----- assembled script -----"
+          Get-Content steps.ps1
+          Write-Output "----------------------------"
+          Write-Output "::endgroup::"
+
+          # Run everything in a single shell so documented directory changes
+          # (cd drasi-server) persist, exactly as a user working in one terminal
+          # would experience.
+          pwsh -NoProfile -File steps.ps1

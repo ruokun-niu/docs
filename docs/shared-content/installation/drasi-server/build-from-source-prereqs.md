@@ -36,7 +36,7 @@ export JQ_LIB_DIR="/usr/lib/$(uname -m)-linux-gnu"
 
 Building natively on Windows requires the Visual Studio 2022 Build Tools (for the MSVC toolchain):
 
-```powershell
+```powershell {#windows-native-deps}
 winget install --id Microsoft.VisualStudio.2022.BuildTools -e `
     --override "--quiet --wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
 ```
