@@ -82,7 +82,7 @@ jobs:
             echo "cargo --version"
           } >> steps.sh
 
-          # 3. Clone, build, verify, and build the SSE CLI (extracted from the docs).
+          # 3. Clone, build & verify drasi-server, then build & verify the SSE CLI (extracted from the docs).
           node .github/scripts/extract-doc-commands.js "${{ matrix.platform }}" build >> steps.sh
 
           echo "----- assembled script -----"
@@ -116,7 +116,7 @@ jobs:
           Add-Content steps.ps1 "rustc --version"
           Add-Content steps.ps1 "cargo --version"
 
-          # 3. Clone, build, verify, and build the SSE CLI (extracted from the docs).
+          # 3. Clone, build & verify drasi-server, then build & verify the SSE CLI (extracted from the docs).
           node .github/scripts/extract-doc-commands.js "${{ matrix.platform }}" build | Add-Content steps.ps1
 
           Write-Output "----- assembled script -----"
