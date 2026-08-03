@@ -61,7 +61,15 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout docs repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
+      # The GitHub macOS runners ship an untrusted `aws/tap`; any `brew` command
+      # (such as the documented `brew install`) then prints a tap-trust warning.
+      # We don't use that tap, so remove it to keep the build log clean.
+      - name: Remove untrusted preinstalled Homebrew tap (macOS)
+        if: matrix.platform == 'macos'
+        shell: bash
+        run: brew untap aws/tap || true
 
       - name: Follow the Build from Source guide
         if: matrix.platform != 'windows'
